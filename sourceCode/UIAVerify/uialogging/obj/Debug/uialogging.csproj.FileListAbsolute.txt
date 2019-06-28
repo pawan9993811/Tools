@@ -1,0 +1,5 @@
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\bin\debug\UIALogging.dll
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\bin\debug\UIALogging.pdb
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\uialogging\obj\Debug\uialogging.csproj.CoreCompileInputs.cache
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\uialogging\obj\Debug\UIALogging.dll
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\uialogging\obj\Debug\UIALogging.pdb

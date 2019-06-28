@@ -1,0 +1,7 @@
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\bin\debug\WUIATestLibrary.dll
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\bin\debug\WUIATestLibrary.pdb
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\UIATestLibrary\obj\Debug\UIATestLibrary.csprojAssemblyReference.cache
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\UIATestLibrary\obj\Debug\UIATestLibrary.csproj.CoreCompileInputs.cache
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\UIATestLibrary\obj\Debug\UIATestLibrary.csproj.CopyComplete
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\UIATestLibrary\obj\Debug\WUIATestLibrary.dll
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\UIATestLibrary\obj\Debug\WUIATestLibrary.pdb

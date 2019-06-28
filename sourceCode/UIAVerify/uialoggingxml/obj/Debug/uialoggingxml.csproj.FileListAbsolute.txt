@@ -1,0 +1,7 @@
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\bin\debug\uialoggerxml.dll
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\bin\debug\uialoggerxml.pdb
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\uialoggingxml\obj\Debug\uialoggingxml.csprojAssemblyReference.cache
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\uialoggingxml\obj\Debug\uialoggingxml.csproj.CoreCompileInputs.cache
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\uialoggingxml\obj\Debug\uialoggingxml.csproj.CopyComplete
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\uialoggingxml\obj\Debug\uialoggerxml.dll
+C:\traning\gitlab\common-automation-framework\Tools\UIAutomationVerify\sourceCode\sourceCode\UIAVerify\uialoggingxml\obj\Debug\uialoggerxml.pdb
