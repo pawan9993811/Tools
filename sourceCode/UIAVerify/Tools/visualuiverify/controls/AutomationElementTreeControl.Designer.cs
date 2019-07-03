@@ -46,6 +46,7 @@ namespace VisualUIAVerify.Controls
             this.goToLastChildrenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addElementStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._elementsImageList = new System.Windows.Forms.ImageList(this.components);
             this._contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +72,8 @@ namespace VisualUIAVerify.Controls
             this._contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.refreshToolStripMenuItem,
             this.navigateToolStripMenuItem,
-            this.snapToolStripMenuItem});
+            this.snapToolStripMenuItem,
+            this.addElementStripMenuItem});
             this._contextMenuStrip.Name = "contextMenuStrip1";
             this._contextMenuStrip.Size = new System.Drawing.Size(233, 136);
             // 
@@ -148,6 +150,12 @@ namespace VisualUIAVerify.Controls
             this.snapToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.snapToolStripMenuItem.Text = "Snap mouse to ClickablePoint";
             this.snapToolStripMenuItem.Click += new System.EventHandler(this.snapToolStripMenuItem_Click);
+
+            this.addElementStripMenuItem.Name = "AddElement";
+            this.addElementStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.addElementStripMenuItem.Text = "Add Element";
+            this.addElementStripMenuItem.Click += new System.EventHandler(this.addElementStripMenuItem_Click);
+
             // 
             // _elementsImageList
             // 
@@ -184,5 +192,6 @@ namespace VisualUIAVerify.Controls
         private System.Windows.Forms.ToolStripMenuItem goToLastChildrenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setControlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem snapToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addElementStripMenuItem;
     }
 }

@@ -92,7 +92,7 @@ namespace VisualUIAVerify.Controls
             // if _treeWalker hasn't been assigned then use default walker (which is ControlViewWalker)
             if (this._treeWalker == null)
             {
-//                this._treeWalker = TreeWalker.ControlViewWalker;
+                //                this._treeWalker = TreeWalker.ControlViewWalker;
 
                 //I am going to ignore all elements of this application
                 Condition condition1 = new PropertyCondition(AutomationElement.ProcessIdProperty, Process.GetCurrentProcess().Id);
@@ -102,7 +102,7 @@ namespace VisualUIAVerify.Controls
         }
 
         #endregion
-        
+
         #region public properties (TreeWalker, RootElement, RootNode, SelectedNode)
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace VisualUIAVerify.Controls
             get
             {
                 InitializeTreeWalker();
-                return this._treeWalker; 
+                return this._treeWalker;
             }
             set
             {
@@ -141,10 +141,10 @@ namespace VisualUIAVerify.Controls
                 this._rootElement = value;
 
                 InitializeElementTree();
-//                _elementsTreeView.Nodes[0].Expand();
+                //                _elementsTreeView.Nodes[0].Expand();
             }
         }
-        
+
         /// <summary>
         /// Gets RootNode of the tree
         /// </summary>
@@ -201,7 +201,7 @@ namespace VisualUIAVerify.Controls
 
         #endregion
 
-        
+
         #region public methods
 
         /// <summary>
@@ -511,7 +511,7 @@ namespace VisualUIAVerify.Controls
 
         #endregion
 
-        
+
         #region helper private methods
         /// <summary>
         /// This method is for validating that currentTestTypeRootNode in parametr is not null and belongs to this tree
@@ -649,6 +649,13 @@ namespace VisualUIAVerify.Controls
             }
         }
 
+        private void addElementStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.SelectedNode != null)
+            {
+
+            }
+        }
 
         // whatever mouse button pressed, it will select the currentTestTypeRootNode
         private void _elementsTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
