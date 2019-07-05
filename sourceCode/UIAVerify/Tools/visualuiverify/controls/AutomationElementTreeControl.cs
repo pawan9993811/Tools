@@ -24,6 +24,8 @@ using System.Windows.Automation;
 using System.Diagnostics;
 using VisualUIAVerify.Misc;
 using VisualUIAVerify.Features;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace VisualUIAVerify.Controls
 {
@@ -653,8 +655,63 @@ namespace VisualUIAVerify.Controls
         {
             if (this.SelectedNode != null)
             {
+                var parents = GetAllParents();
+                using (var sw = new System.IO.StreamWriter(@"C:\Temp\nodes.log"))
+                {
+                    //using (XmlWriter writer = XmlWriter.Create(@"D:\nodes.xml"))
+                    //{
+                    //writer.WriteStartElement("Automation");
+                    foreach (var node in parents)
+                    {
+                        var aeNode = (AutomationElementTreeNode)node.Tag;
+                        var automationElement = aeNode.AutomationElement.Current;
 
+                        string elementName = automationElement.Name;
+                        string elementType = automationElement.LocalizedControlType;
+                        string elementTag = elementName + elementType;
+
+                        XDocument xml = new XDocument
+                       (
+                         new XElement("children",
+                            new XElement("children",new XAttribute ("Name",automationElement.Name),
+                                new XElement("AutomationId", automationElement.AutomationId),
+                                new XElement("ClassName", automationElement.ClassName),
+                                new XElement("Name", automationElement.Name)))
+                         );
+                       // xml.Save(@"C:\Temp\nodes.log");
+
+                       // XElement address = new XElement(elementTag,
+                      //      new XElement("AutomationId", automationElement.AutomationId),
+                      //      new XElement("ClassName", automationElement.ClassName)
+
+                      //  );
+                        sw.WriteLine(xml);
+                        //writer.WriteElementString("Node" , automationElement.Name);
+                        //writer.WriteAttributeString("AutomationId", automationElement.AutomationId);
+                        //writer.WriteAttributeString("ClassName", automationElement.ClassName);
+                        //sw.WriteLine(automationElement.AutomationId);
+                        //sw.WriteLine(automationElement.Name);
+                        //sw.WriteLine(automationElement.ClassName);
+                        //sw.WriteLine("-------------");
+                    }
+                    //writer.WriteEndElement();
+                    // writer.Flush();
+                    //}
+                }
             }
+        }
+
+        private List<TreeNode> GetAllParents()
+        {
+            var parents = new List<TreeNode>();
+            var node = SelectedNode.TreeNode;
+            while (node.Level > 0)
+            {
+                parents.Add(node);
+                node = node.Parent;
+            }
+
+            return parents;
         }
 
         // whatever mouse button pressed, it will select the currentTestTypeRootNode
