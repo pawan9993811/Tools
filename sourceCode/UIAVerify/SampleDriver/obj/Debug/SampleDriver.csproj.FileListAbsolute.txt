@@ -1,0 +1,7 @@
+C:\traning\github\Tools\sourceCode\UIAVerify\bin\debug\SampleDriver.exe
+C:\traning\github\Tools\sourceCode\UIAVerify\bin\debug\SampleDriver.pdb
+C:\traning\github\Tools\sourceCode\UIAVerify\SampleDriver\obj\Debug\SampleDriver.csprojAssemblyReference.cache
+C:\traning\github\Tools\sourceCode\UIAVerify\SampleDriver\obj\Debug\SampleDriver.csproj.CoreCompileInputs.cache
+C:\traning\github\Tools\sourceCode\UIAVerify\SampleDriver\obj\Debug\SampleDriver.csproj.CopyComplete
+C:\traning\github\Tools\sourceCode\UIAVerify\SampleDriver\obj\Debug\SampleDriver.exe
+C:\traning\github\Tools\sourceCode\UIAVerify\SampleDriver\obj\Debug\SampleDriver.pdb
