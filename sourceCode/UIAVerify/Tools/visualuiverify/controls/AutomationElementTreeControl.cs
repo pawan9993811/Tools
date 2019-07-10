@@ -24,6 +24,9 @@ using System.Windows.Automation;
 using System.Diagnostics;
 using VisualUIAVerify.Misc;
 using VisualUIAVerify.Features;
+using System.Xml;
+using System.Xml.Linq;
+using System.IO;
 
 namespace VisualUIAVerify.Controls
 {
@@ -653,8 +656,119 @@ namespace VisualUIAVerify.Controls
         {
             if (this.SelectedNode != null)
             {
+<<<<<<< HEAD
 
             }
+=======
+                var parents = GetAllParents();
+                XmlDocument doc = null;
+                var fileName = @"C:\Temp\nodes.log";
+                if (File.Exists(fileName))
+                {
+                    doc = new XmlDocument();
+                    doc.Load(fileName);
+                }
+
+                if (this.SelectedNode != null)
+                {
+                    if (doc != null)
+                    {
+                        string xpath = @"//Root/Node";
+                        TreeNode node; XmlNode parent = null;
+                        for (int i = 0; i < parents.Count; i++)
+                        {
+                            node = parents[i];
+                            var aeNode = (AutomationElementTreeNode)node.Tag;
+                            var aEl = aeNode.AutomationElement.Current;
+                            var nodes = doc.SelectNodes(xpath);
+                            bool insertNow = false;
+                            foreach (XmlNode node1 in nodes)
+                            {
+                                insertNow = true;
+                                if (((System.Xml.XmlElement)node1).SelectSingleNode("SearchCriteria/Property[2]").Attributes[0].Value == aEl.ClassName &&
+                                    ((System.Xml.XmlElement)node1).SelectSingleNode("SearchCriteria/Property[1]").Attributes[0].Value == aEl.AutomationId)
+                                { parent = node1; insertNow = false; break; }
+
+                            }
+                            if (insertNow)
+                            {
+                                for (int j = i; j < parents.Count; j++)
+                                {
+                                    node = parents[j];
+                                    aeNode = (AutomationElementTreeNode)node.Tag;
+                                    aEl = aeNode.AutomationElement.Current;
+                                    XmlElement child1 = doc.CreateElement("Node");
+
+                                    child1.SetAttribute("DispalyName", aEl.ClassName);
+                                    XmlElement searchCritchild = doc.CreateElement("SearchCriteria");
+                                    XmlElement propchildId = doc.CreateElement("Property");
+                                    XmlElement propchildName = doc.CreateElement("Property");
+                                    propchildId.SetAttribute("AutomationId", aEl.AutomationId);
+                                    propchildName.SetAttribute("Name", aEl.ClassName);
+
+                                    searchCritchild.AppendChild(propchildId);
+                                    searchCritchild.AppendChild(propchildName);
+                                    child1.AppendChild(searchCritchild);
+
+
+                                    parent.AppendChild(child1);
+
+                                    parent = child1;
+                                }
+                                break;
+                            }
+                            xpath = xpath + @"/Node";
+                        }
+                        doc.Save(fileName);
+                    }
+                    else
+                    {
+                        doc = new XmlDocument();
+                        XmlDeclaration xDeclare = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+                        XmlElement documentRoot = doc.DocumentElement;
+                        XmlElement rootEl = doc.CreateElement("Root");
+                        var prevEl = rootEl;
+                        foreach (var node in parents)
+                        {
+                            var aeNode = (AutomationElementTreeNode)node.Tag;
+                            var aEl = aeNode.AutomationElement.Current;
+
+                            XmlElement child1 = doc.CreateElement("Node");
+                            child1.SetAttribute("DispalyName", aEl.ClassName);
+                            XmlElement searchCritchild = doc.CreateElement("SearchCriteria");
+                            XmlElement propchildId = doc.CreateElement("Property");
+                            XmlElement propchildName = doc.CreateElement("Property");
+                            propchildId.SetAttribute("AutomationId", aEl.AutomationId);
+                            propchildName.SetAttribute("Name", aEl.ClassName);
+
+                            searchCritchild.AppendChild(propchildId);
+                            searchCritchild.AppendChild(propchildName);
+                            child1.AppendChild(searchCritchild);
+
+
+                            prevEl.AppendChild(child1);
+
+                            prevEl = child1;
+                        }
+                        doc.AppendChild(rootEl);
+                    }
+                    doc.Save(fileName);
+                }
+            }
+        }
+
+        private List<TreeNode> GetAllParents()
+        {
+            var parents = new List<TreeNode>();
+            var node = SelectedNode.TreeNode;
+            while (node.Level > 0)
+            {
+                parents.Add(node);
+                node = node.Parent;
+            }
+            parents.Reverse();
+            return parents;
+>>>>>>> origin/master
         }
 
         // whatever mouse button pressed, it will select the currentTestTypeRootNode
