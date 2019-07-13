@@ -656,22 +656,23 @@ namespace VisualUIAVerify.Controls
         {
             if (this.SelectedNode != null)
             {
-<<<<<<< HEAD
-
-            }
-=======
                 var parents = GetAllParents();
                 XmlDocument doc = null;
+                bool noRoot = false;
                 var fileName = @"C:\Temp\nodes.log";
                 if (File.Exists(fileName))
                 {
                     doc = new XmlDocument();
-                    doc.Load(fileName);
+                    try
+                    {
+                        doc.Load(fileName);
+                    }
+                    catch { noRoot = true; };
                 }
 
                 if (this.SelectedNode != null)
                 {
-                    if (doc != null)
+                    if (doc != null && !noRoot)
                     {
                         string xpath = @"//Root/Node";
                         TreeNode node; XmlNode parent = null;
@@ -685,10 +686,21 @@ namespace VisualUIAVerify.Controls
                             foreach (XmlNode node1 in nodes)
                             {
                                 insertNow = true;
-                                if (((System.Xml.XmlElement)node1).SelectSingleNode("SearchCriteria/Property[2]").Attributes[0].Value == aEl.ClassName &&
-                                    ((System.Xml.XmlElement)node1).SelectSingleNode("SearchCriteria/Property[1]").Attributes[0].Value == aEl.AutomationId)
+                                XmlNode propName, propId;
+                                propName = ((System.Xml.XmlElement)node1).SelectSingleNode("SearchCriteria/Property[@Name]");
+                                propId = ((System.Xml.XmlElement)node1).SelectSingleNode("SearchCriteria/Property[@AutomationId]");
+                                if (propName != null &&
+                                    propName.Attributes[0].Value == aEl.Name && propId != null &&
+                                     propId.Attributes[0].Value == aEl.AutomationId)
                                 { parent = node1; insertNow = false; break; }
-
+                                else if (propName == null &&
+                                     propId != null &&
+                                    propId.Attributes[0].Value == aEl.AutomationId)
+                                { parent = node1; insertNow = false; break; }
+                                else if (propId == null &&
+                                     propName != null &&
+                                    propName.Attributes[0].Value == aEl.Name)
+                                { parent = node1; insertNow = false; break; }
                             }
                             if (insertNow)
                             {
@@ -699,15 +711,25 @@ namespace VisualUIAVerify.Controls
                                     aEl = aeNode.AutomationElement.Current;
                                     XmlElement child1 = doc.CreateElement("Node");
 
-                                    child1.SetAttribute("DispalyName", aEl.ClassName);
+                                    child1.SetAttribute("DispalyName", aEl.Name);
+                                    child1.SetAttribute(XMLAttributes.ApplicationType.ToString(), ApplicationType.Windows.ToString());
+                                    child1.SetAttribute(XMLAttributes.TechnologyName.ToString(), TechnologyName.White.ToString());
+                                    child1.SetAttribute("ControlType", aEl.LocalizedControlType);
                                     XmlElement searchCritchild = doc.CreateElement("SearchCriteria");
-                                    XmlElement propchildId = doc.CreateElement("Property");
-                                    XmlElement propchildName = doc.CreateElement("Property");
-                                    propchildId.SetAttribute("AutomationId", aEl.AutomationId);
-                                    propchildName.SetAttribute("Name", aEl.ClassName);
 
-                                    searchCritchild.AppendChild(propchildId);
-                                    searchCritchild.AppendChild(propchildName);
+                                    if (!string.IsNullOrEmpty(aEl.AutomationId))
+                                    {
+                                        XmlElement propchildId = doc.CreateElement("Property");
+                                        propchildId.SetAttribute("AutomationId", aEl.AutomationId);
+                                        searchCritchild.AppendChild(propchildId);
+                                    }
+                                    if (!string.IsNullOrEmpty(aEl.ClassName))
+                                    {
+                                        XmlElement propchildName = doc.CreateElement("Property");
+                                        propchildName.SetAttribute("Name", aEl.Name);
+                                        searchCritchild.AppendChild(propchildName);
+                                    }
+
                                     child1.AppendChild(searchCritchild);
 
 
@@ -734,15 +756,24 @@ namespace VisualUIAVerify.Controls
                             var aEl = aeNode.AutomationElement.Current;
 
                             XmlElement child1 = doc.CreateElement("Node");
-                            child1.SetAttribute("DispalyName", aEl.ClassName);
+                            child1.SetAttribute("DispalyName", aEl.Name);
+                            child1.SetAttribute(XMLAttributes.ApplicationType.ToString(), ApplicationType.Windows.ToString());
+                            child1.SetAttribute(XMLAttributes.TechnologyName.ToString(), TechnologyName.White.ToString());
+                            child1.SetAttribute("ControlType", aEl.LocalizedControlType);
                             XmlElement searchCritchild = doc.CreateElement("SearchCriteria");
-                            XmlElement propchildId = doc.CreateElement("Property");
-                            XmlElement propchildName = doc.CreateElement("Property");
-                            propchildId.SetAttribute("AutomationId", aEl.AutomationId);
-                            propchildName.SetAttribute("Name", aEl.ClassName);
 
-                            searchCritchild.AppendChild(propchildId);
-                            searchCritchild.AppendChild(propchildName);
+                            if (!string.IsNullOrEmpty(aEl.AutomationId))
+                            {
+                                XmlElement propchildId = doc.CreateElement("Property");
+                                propchildId.SetAttribute("AutomationId", aEl.AutomationId);
+                                searchCritchild.AppendChild(propchildId);
+                            }
+                            if (!string.IsNullOrEmpty(aEl.ClassName))
+                            {
+                                XmlElement propchildName = doc.CreateElement("Property");
+                                propchildName.SetAttribute("Name", aEl.Name);
+                                searchCritchild.AppendChild(propchildName);
+                            }
                             child1.AppendChild(searchCritchild);
 
 
@@ -768,7 +799,6 @@ namespace VisualUIAVerify.Controls
             }
             parents.Reverse();
             return parents;
->>>>>>> origin/master
         }
 
         // whatever mouse button pressed, it will select the currentTestTypeRootNode
@@ -795,8 +825,28 @@ namespace VisualUIAVerify.Controls
         private void _elementsTreeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
             SetSelectedNodeTransparentColor();
+            //s
         }
 
         #endregion
+    }
+
+    public enum ApplicationType
+    {
+        Windows,
+        Web
+    }
+    public enum TechnologyName
+    {
+        White,
+        FlaUI,
+        UIA,
+        Selenium
+    }
+
+    public enum XMLAttributes
+    {
+        TechnologyName,
+        ApplicationType
     }
 }
